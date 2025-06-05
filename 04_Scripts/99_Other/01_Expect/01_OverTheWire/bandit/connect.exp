@@ -1,0 +1,32 @@
+#!/bin/expect
+
+# Set expect wait time
+set timeout 10
+
+# Set initial variable values for SSH logins
+set host bandit.labs.overthewire.org
+set port 2220
+set last_pass_file [open saved_pass.txt r]
+set body [read $last_pass_file]
+set user_pass [split $body \n]
+set user [lindex $user_pass 0]
+set pass [lindex $user_pass 1]
+
+proc connect_SSH {host port user pass} {
+	global spawn_id
+	
+	# Spawn SSH Process
+	spawn ssh -l $user -p $port $host
+	# puts "SSH SPAWNED"
+	# Expect and pass appropriate password 
+	expect "assword: " {
+		# puts "SENDING PASS $pass"
+		send "$pass\n"
+	}
+	# puts "EXITED EXPECT"
+	# interact
+}
+
+# Connect to SSH
+connect_SSH $host $port $user $pass
+interact

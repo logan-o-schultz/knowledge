@@ -1,0 +1,70 @@
+ssh -l bandit<lvl> bandit.labs.overthewire.org -p 2220
+
+
+
+===========
+= Level 0 =
+===========
+
+ssh -l bandit0 bandit.labs.overthewire.org -p 2220
+
+	* pass: bandit0
+
+
+
+===========
+= Level 1 =
+===========
+
+ssh -l bandit1 bandit.labs.overthewire.org -p 2220
+
+	* pass: Located in "readme" file in home directoory
+
+
+
+===========
+= Level 2 =
+===========
+
+ssh -l bandit2 bandit.labs.overthewire.org -p 2220
+
+	* pass: Located in file "-" in home directory
+	* note: Use cat ./- to read the file
+
+
+===========
+= Level 3 =
+===========
+
+ssh -l bandit3 bandit.labs.overthewire.org -p 2220
+
+	* pass: Located in file "spaces in this filename" in home directory
+	* note: Use escape characters to read file
+
+
+===========
+= Level 4 =
+===========
+
+ssh -l bandit4 bandit.labs.overthewire.org -p 2220
+
+	* pass: Located in file "...Hiding-From-You" in home directory
+	* note: Use ls -a to find file
+
+
+===========
+= Level 5 =
+===========
+
+ssh -l bandit5 bandit.labs.overthewire.org -p 2220
+
+	* pass: Located in only human-readable file
+	* note: Use file ./* to get file types
+
+
+===========
+= Level 6 =
+===========
+
+ssh -l bandit6 bandit.labs.overthewire.org -p 2220
+

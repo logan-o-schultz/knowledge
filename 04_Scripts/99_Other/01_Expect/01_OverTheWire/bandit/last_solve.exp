@@ -1,0 +1,61 @@
+#!/bin/expect
+
+# Set expect wait time
+set timeout 10
+
+# Set initial variable values for SSH logins
+set host bandit.labs.overthewire.org
+set port 2220
+set last_pass_file [open saved_pass.txt r]
+set body [read $last_pass_file]
+set user_pass [split $body \n]
+set user [lindex $user_pass 0]
+set pass [lindex $user_pass 1]
+
+proc connect_SSH {host port user pass} {
+	global spawn_id
+	
+	# Spawn SSH Process
+	spawn ssh -l $user -p $port $host
+	# puts "SSH SPAWNED"
+	# Expect and pass appropriate password 
+	expect "assword: " {
+		# puts "SENDING PASS $pass"
+		send "$pass\n"
+	}
+	# puts "EXITED EXPECT"
+	# interact
+}
+
+# ======================
+# = Level 5 -> Level 6 =
+# ======================
+
+# Connect to SSH
+connect_SSH $host $port $user $pass
+# Expect prompt
+expect "bandit" {
+	# Get name of password file
+	send ""
+	# Reset expect_out buffer up to this point
+	expect "\n" 
+	# Set file variable to file listed by "ls -a"
+	expect "\n" { 
+		# Save name of password file
+		set pass_file "$expect_out(buffer)\n"
+	}
+	# Read password file
+	send "cat $pass_file\n" 
+	# Reset expect_out buffer up to this point
+	expect "\n" 
+	# Set password from end of last buffer to end of line and exit
+	expect "\r" { 
+		# Save content of password file to password variable
+		set pass "$expect_out(buffer)"
+		send "exit\n"
+	}
+}
+
+sleep 1
+puts $pass
+sleep 1

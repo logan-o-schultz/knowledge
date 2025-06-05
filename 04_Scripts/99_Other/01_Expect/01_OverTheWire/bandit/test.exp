@@ -1,0 +1,16 @@
+#!/bin/expect
+
+set timeout 10
+
+set fd [open passwd.txt w]
+set testvar "hello world"
+
+# puts $fd $testvar
+# exec "echo $testvar >> passwd.txt"
+
+
+proc sayHello {fd hi there} {
+	puts $fd "$hi $there"
+}
+
+sayHello $fd hey john

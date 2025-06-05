@@ -1,0 +1,220 @@
+#!/bin/expect
+
+# Set expect wait time
+set timeout 10
+
+# Set initial variable values for SSH logins
+set host bandit.labs.overthewire.org
+set port 2220
+set user bandit0
+set pass bandit0
+set file passwd.txt
+exec echo -n > passwd.txt
+
+proc connect_SSH {host port user pass} {
+	global spawn_id
+	
+	# Spawn SSH Process
+	spawn ssh -l $user -p $port $host
+	# puts "SSH SPAWNED"
+	# Expect and pass appropriate password 
+	expect "assword: " {
+		# puts "SENDING PASS $pass"
+		send "$pass\n"
+	}
+	# puts "EXITED EXPECT"
+	# interact
+}
+
+proc append_to_file {file_name text} {
+	set file [open $file_name r]
+	set body [read $file]
+	close $file
+	set file [open $file_name w]
+	puts $file "$body$text"
+	close $file
+}
+
+proc save_last_pass {user pass} {
+	set saved_pass_file [open saved_pass.txt w]
+	puts -nonewline $saved_pass_file "$user\n$pass"
+	close $saved_pass_file
+}
+
+# ======================
+# = Level 0 -> Level 1 =
+# ======================
+
+append_to_file $file "$user:\t$pass"
+
+connect_SSH $host $port $user $pass
+# Expect prompt
+expect "$user" { 
+	# Read password file
+	send "cat readme\n" 
+	# Reset expect_out buffer up to this point
+	expect "is: " 
+	# Set password from end of last buffer to end of line and exit
+	expect "\r" { 
+		set pass "$expect_out(buffer)"
+		send "exit\n"
+	}
+}
+ 
+# ======================
+# = Level 1 -> Level 2 =
+# ======================
+
+# Set appropriate SSH user login
+set user "bandit1"
+append_to_file $file "$user:\t$pass"
+# Connect to SSH
+connect_SSH $host $port $user $pass
+# Expect prompt
+expect "$user" {
+	# Read password file
+	send "cat './-'\r" 
+	# Reset expect_out buffer up to this point
+	expect "\n" 
+	# Set password from end of last buffer to end of line and exit
+	expect "\r" { 
+		set pass "$expect_out(buffer)"
+		send "exit\n"
+	}
+}
+
+
+# ======================
+# = Level 2 -> Level 3 =
+# ======================
+
+# Set appropriate SSH user login
+set user "bandit2"
+append_to_file $file "$user:\t$pass"
+# Connect to SSH
+connect_SSH $host $port $user $pass
+# Expect prompt
+expect "bandit" {
+	# Read password file
+	send "cat 'spaces in this filename'\r" 
+	# Reset expect_out buffer up to this point
+	expect "\n" 
+	# Set password from end of last buffer to end of line and exit
+	expect "\r" { 
+		set pass "$expect_out(buffer)"
+		send "exit\n"
+	}
+}
+
+# ======================
+# = Level 3 -> Level 4 =
+# ======================
+
+# Set appropriate SSH user login
+set user "bandit3"
+append_to_file $file "$user:\t$pass"
+# Connect to SSH
+connect_SSH $host $port $user $pass
+# Expect prompt
+expect "bandit" {
+	# Get list of files
+	send "ls -A inhere\n" 
+	# Reset expect_out buffer up to this point
+	expect "\n" 
+	# Set file variable to file listed by "ls -a"
+	expect "\n" { 
+		set pass_file "$expect_out(buffer)\n"
+	}
+	# Read password file
+	send "cat inhere/$pass_file\n" 
+	# Reset expect_out buffer up to this point
+	expect "\n" 
+	# Set password from end of last buffer to end of line and exit
+	expect "\r" { 
+		set pass "$expect_out(buffer)"
+		send "exit\n"
+	}
+}
+
+# ======================
+# = Level 4 -> Level 5 =
+# ======================
+
+# Set appropriate SSH user login
+set user "bandit4"
+append_to_file $file "$user:\t$pass"
+# Connect to SSH
+connect_SSH $host $port $user $pass
+# Expect prompt
+expect "bandit" {
+	# Get list of files
+	send "ls -1 inhere | xargs -I {} file 'inhere/{}' | grep text | cut -d ' ' -f 1 | cut -d ':' -f 1\n" 
+	# Reset expect_out buffer up to this point
+	expect "\n" 
+	# Set file variable to file listed by "ls -a"
+	expect "\n" { 
+		set pass_file "$expect_out(buffer)\n"
+	}
+	# Read password file
+	send "cat $pass_file\n" 
+	# Reset expect_out buffer up to this point
+	expect "\n" 
+	# Set password from end of last buffer to end of line and exit
+	expect "\r" { 
+		set pass "$expect_out(buffer)"
+		send "exit\n"
+	}
+}
+
+# ======================
+# = Level 5 -> Level 6 =
+# ======================
+
+# Set appropriate SSH user login
+set user "bandit5"
+append_to_file $file "$user:\t$pass"
+save_last_pass $user $pass
+# Connect to SSH
+connect_SSH $host $port $user $pass
+# Expect prompt
+expect "bandit" {
+	# Get name of password file
+	send "find . -size 1033c \! -perm /111 -exec file {} + | grep ASCII | cut -d ' ' -f 1 | cut -d ':' -f 1\n"
+	# Reset expect_out buffer up to this point
+	expect "\n" 
+	# Set file variable to file listed by "ls -a"
+	expect "\n" { 
+		# Save name of password file
+		set pass_file "$expect_out(buffer)\n"
+	}
+	# Read password file
+	send "cat $pass_file\n" 
+	# Reset expect_out buffer up to this point
+	expect "\n" 
+	# Set password from end of last buffer to end of line and exit
+	expect "\r" { 
+		# Save content of password file to password variable
+		set pass "$expect_out(buffer)"
+		send "exit\n"
+	}
+}
+
+# ======================
+# = Level 6 -> Level 7 =
+# ======================
+
+# Set appropriate SSH user login
+set user "bandit6"
+append_to_file $file "$user:\t$pass"
+save_last_pass $user $pass
+exit
+
+# ======================
+# = Level 7 -> Level 8 =
+# ======================
+
+# Set appropriate SSH user login
+set user "bandit7"
+append_to_file $file "$user:\t$pass"
+save_last_pass $user $pass
+exit

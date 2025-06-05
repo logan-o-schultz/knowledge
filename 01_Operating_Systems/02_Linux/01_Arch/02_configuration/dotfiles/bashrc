@@ -2,6 +2,9 @@
 # ~/.bashrc
 #
 
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
 # Color mapping
 grey='\[\033[1;30m\]'
 red='\[\033[0;31m\]'
@@ -19,9 +22,6 @@ BLUE='\[\033[1;34m\]'
 cyan='\[\033[0;36m\]'
 CYAN='\[\033[1;36m\]'
 NC='\[\033[0m\]'
-
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
 
 # Set conveniet aliases
 alias ls='ls --color=auto'

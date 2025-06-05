@@ -3,7 +3,7 @@ Comprehensive knowledge repository for notes, documentation, standard processes 
 
 ## TOC
 
-1. Operating Systems
+1. [Operating Systems](./01_Operating-Systems)
     1. Windows
     1. Linux
         1. Arch

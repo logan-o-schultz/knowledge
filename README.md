@@ -10,10 +10,6 @@ Comprehensive knowledge repository for notes, documentation, standard processes 
             1. installation
             1. configuration
                 - dotfiles
-                    - hypr
-                    - kitty
-                    - nvim
-                    - waybar
 1. Services
 1. Languages
     1. Python
@@ -29,4 +25,3 @@ Comprehensive knowledge repository for notes, documentation, standard processes 
         1. Expect
             1. OverTheWire
                 - bandit
-                    - expect scripts

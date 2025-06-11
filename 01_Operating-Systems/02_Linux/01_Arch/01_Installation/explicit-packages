@@ -3,6 +3,7 @@ alsa-utils
 base
 base-devel
 bash-completion
+cdrtools
 cmake
 devtools
 expect

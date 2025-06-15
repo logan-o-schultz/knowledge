@@ -45,9 +45,9 @@ PROMPT_COMMAND="history -a; history -n"
 shopt -s histverify
 DATEFORMAT='%a %d %b'
 # Set prompt
-PS1="$cyan┌──┤$darkblue\D{$DATEFORMAT}$cyan├──┤$darkblue\t$cyan├──┤$darkblue\u@\h$cyan├──┤$darkblue\w$cyan│ $darkblue\033[3m\"$(cat ~/assets/motd.txt)\"\033[0m \n$cyan└┤$ $NC"
-PS1="$cyan┌──┤$darkblue\D{$DATEFORMAT}$cyan├──┤$darkblue\t$cyan├──┤$darkblue\u@\h$cyan├──┤$darkblue\w$cyan│ \n$cyan└┤$darkblue$ $NC"
 # PS1="┌$blue[$cyan\u$blue@$cyan\h \W$blue]$green\$ $NC"
+# PS1="$cyan┌──┤$darkblue\D{$DATEFORMAT}$cyan├──┤$darkblue\t$cyan├──┤$darkblue\u@\h$cyan├──┤$darkblue\w$cyan│ $darkblue\033[3m\"$(cat ~/assets/motd.txt)\"\033[0m \n$cyan└┤$ $NC"
+PS1="$cyan┌──┤$darkblue\D{$DATEFORMAT}$cyan├──┤$darkblue\t$cyan├──┤$darkblue\u@\h$cyan├──┤$darkblue\w$cyan│ \n$cyan└─┤$darkblue$ $NC"
 
 # Wayland compatibility?
 export LIBVA_DRIVER_NAME=iHD
@@ -56,4 +56,4 @@ export EDITOR=/usr/bin/nvim
 # export VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/intel_icd.x86_64.json
 # export VK_LAYER_PATH=/usr/share/vulkan/explicit_layer.d
 
-neofetch --colors 25 6 15 25 6 15
+neofetch --colors 25 6 6 25 6 15

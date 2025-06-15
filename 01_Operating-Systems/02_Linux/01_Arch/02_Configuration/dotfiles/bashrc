@@ -21,6 +21,7 @@ blue='\[\033[0;34m\]'
 BLUE='\[\033[1;34m\]'
 cyan='\[\033[0;36m\]'
 CYAN='\[\033[1;36m\]'
+darkblue='\[\033[38;5;25m\]'
 NC='\[\033[0m\]'
 
 # Set conveniet aliases
@@ -30,6 +31,7 @@ alias ip='ip -c'
 alias py='python'
 alias hypr='hyprland'
 alias bat='cat /sys/class/power_supply/BAT0/capacity'
+alias su='~/assets/su.sh'
 
 # Set history to append instead of overwrite
 shopt -s histappend
@@ -39,9 +41,13 @@ HISTSIZE=1000
 HISTFILESIZE=10000
 # Set write to history file and reload history after each command
 PROMPT_COMMAND="history -a; history -n"
-
+# Set history expansion to verify before execution
+shopt -s histverify
+DATEFORMAT='%a %d %b'
 # Set prompt
-PS1="$blue[$cyan\u$blue@$cyan\h \W$blue]$green\$ $NC"
+PS1="$cyan┌──┤$darkblue\D{$DATEFORMAT}$cyan├──┤$darkblue\t$cyan├──┤$darkblue\u@\h$cyan├──┤$darkblue\w$cyan│ $darkblue\033[3m\"$(cat ~/assets/motd.txt)\"\033[0m \n$cyan└┤$ $NC"
+PS1="$cyan┌──┤$darkblue\D{$DATEFORMAT}$cyan├──┤$darkblue\t$cyan├──┤$darkblue\u@\h$cyan├──┤$darkblue\w$cyan│ \n$cyan└┤$darkblue$ $NC"
+# PS1="┌$blue[$cyan\u$blue@$cyan\h \W$blue]$green\$ $NC"
 
 # Wayland compatibility?
 export LIBVA_DRIVER_NAME=iHD
@@ -50,4 +56,4 @@ export EDITOR=/usr/bin/nvim
 # export VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/intel_icd.x86_64.json
 # export VK_LAYER_PATH=/usr/share/vulkan/explicit_layer.d
 
-neofetch
+neofetch --colors 25 6 15 25 6 15

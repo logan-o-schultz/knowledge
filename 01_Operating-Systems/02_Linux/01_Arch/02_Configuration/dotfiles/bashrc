@@ -32,6 +32,7 @@ alias py='python'
 alias hypr='hyprland'
 alias bat='cat /sys/class/power_supply/BAT0/capacity'
 alias su='~/assets/su.sh'
+alias jrnl='rm ~/journal;ln -s ~/notes/journal/$(date +%Y-%m)/ ~/journal'
 
 # Set history to append instead of overwrite
 shopt -s histappend
@@ -47,7 +48,8 @@ DATEFORMAT='%a %d %b'
 # Set prompt
 # PS1="┌$blue[$cyan\u$blue@$cyan\h \W$blue]$green\$ $NC"
 # PS1="$cyan┌──┤$darkblue\D{$DATEFORMAT}$cyan├──┤$darkblue\t$cyan├──┤$darkblue\u@\h$cyan├──┤$darkblue\w$cyan│ $darkblue\033[3m\"$(cat ~/assets/motd.txt)\"\033[0m \n$cyan└┤$ $NC"
-PS1="$cyan┌──┤$darkblue\D{$DATEFORMAT}$cyan├──┤$darkblue\t$cyan├──┤$darkblue\u@\h$cyan├──┤$darkblue\w$cyan│ \n$cyan└─┤$darkblue$ $NC"
+# PS1="$cyan┌──┤$darkblue\D{$DATEFORMAT}$cyan├──┤$darkblue\t$cyan├──┤$darkblue\u@\h$cyan├──┤ 🮤$darkblue\w$cyan🮥 \n$cyan└─┤$darkblue$ $NC"
+PS1="$cyan┌──┤$darkblue\D{$DATEFORMAT}$cyan├──┤$darkblue\t$cyan├──┤$darkblue\u@\h$cyan│ $NC\w$cyan \n└─┤$darkblue$ $NC"
 
 # Wayland compatibility?
 export LIBVA_DRIVER_NAME=iHD

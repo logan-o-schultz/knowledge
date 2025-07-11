@@ -23,9 +23,9 @@
         // "power-profiles-daemon",
         // "backlight",
         "keyboard-state",
-        "battery",
+        "battery"
         // "battery#bat2",
-        "tray"
+        // "tray"
         // "custom/power"
     ],
     // Modules configuration
@@ -157,8 +157,8 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "",
-        "format-alt": "{essid} ({signalStrength}%) ",
+        "format-wifi": " ",
+        "format-alt": "{essid} ({signalStrength}%)  ",
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
